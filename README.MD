@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bmgandre/angular-object-logger.svg?branch=master)](https://travis-ci.org/bmgandre/angular-object-logger)
+
 # angular-object-logger
 
 Send objects logs to console or web.
