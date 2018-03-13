@@ -1,3 +1,7 @@
+# Node
+node_modules/*
+npm-debug.log
+
 # Logs
 logs
 *.log
@@ -29,7 +33,7 @@ bower_components
 # node-waf configuration
 .lock-wscript
 
-# Compiled binary addons (http://nodejs.org/api/addons.html)
+# Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
 # Dependency directories
@@ -57,3 +61,67 @@ typings/
 # dotenv environment variables file
 .env
 
+# next.js build output
+.next
+
+# TypeScript
+src/*.js
+src/*.map
+src/*.d.ts
+
+# JetBrains
+.idea
+.project
+.settings
+.idea/*
+*.iml
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Windows
+Thumbs.db
+Desktop.ini
+*.bak
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# Kde
+.*.kate-swp
+.swp.*
+*.kdev4
+.kdev4/
+
+# Mac
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Ngc generated files
+**/*.ngfactory.ts
+
+# Build files
+dist/*
+
+# Playground tmp files
+.playground
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+Session.vim
+.netrwhist
+*~
+tags
