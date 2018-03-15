@@ -124,7 +124,7 @@ export class LoggerFactoryService {
             return this.parseMinMaxRule(obj);
         } else if (obj.level) {
             return this.parseFixedRule(obj);
-        } else if (obj.lovels) {
+        } else if (obj.levels) {
             return this.parseMultiLevelRule(obj);
         }
 
