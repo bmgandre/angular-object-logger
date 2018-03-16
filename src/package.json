@@ -22,8 +22,8 @@
   "jsnext:main": "angular-object-logger.js",
   "typings": "angular-object-logger.d.ts",
   "peerDependencies": {
-    "@angular/core": "^4.3.0",
-    "@angular/common": "^4.3.0",
+    "@angular/core": ">= 4.3.0",
+    "@angular/common": ">= 4.3.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4",
     "stacktrace-js": "^2.0.0"
