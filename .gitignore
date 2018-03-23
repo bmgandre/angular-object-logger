@@ -68,6 +68,9 @@ typings/
 src/*.js
 src/*.map
 src/*.d.ts
+src/**/*.js
+src/**/*.map
+src/**/*.d.ts
 playground/*.js
 playground/*.map
 playground/*.d.ts
