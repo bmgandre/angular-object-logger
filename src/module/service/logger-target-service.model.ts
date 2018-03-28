@@ -1,18 +1,18 @@
-import { Injectable, Inject, Optional } from '@angular/core';
-import { LoggerTargetConfig } from './logger-target-config.model';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { LogEntry } from './log-entry.model';
 import { LogLevel } from './log-level.model';
+import { LoggerTargetConfig } from './logger-target-config.model';
 
 export abstract class LoggerTargetService {
 
-    public constructor(
+    constructor(
         @Optional() private config: LoggerTargetConfig
     ) { }
 
-    public log(entry: LogEntry): void {
+    log(entry: LogEntry): void {
         if (this.config) {
             for (const filter of this.config.filters) {
-                if (filter.IsMatch(entry.logger, LogLevel[entry.level])) {
+                if (filter.IsMatch(entry.logger, LogLevel[entry.level as keyof typeof LogLevel])) {
                     this.writeLog(entry);
                     break;
                 }

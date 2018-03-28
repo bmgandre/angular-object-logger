@@ -5,6 +5,7 @@
       "/": "playground",
       "/node_modules/": "node_modules",
       "/dist/": "dist",
+      "/playground": "playground",
       "/.playground": ".playground"
     }
   }

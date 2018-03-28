@@ -1,22 +1,19 @@
-import {
-    LogFilter,
-    MinMaxLevelLogFilter
-} from './log-filter.model';
+import { LogFilter, MinMaxLevelLogFilter } from './log-filter.model';
 
 export class LoggerConfig {
-    public filters?: LogFilter[] = [];
-    public consoleTarget?: ConsoleLoggerTargetConfig;
-    public webTarget?: WebLoggerTargetConfig;
+    filters?: Array<LogFilter> = [];
+    consoleTarget?: ConsoleLoggerTargetConfig;
+    webTarget?: WebLoggerTargetConfig;
 }
 
 export class LoggerTargetConfig {
-    public filters?: LogFilter[] = [];
+    filters?: Array<LogFilter> = [];
 }
 
 export class ConsoleLoggerTargetConfig extends LoggerTargetConfig {
 }
 
 export class WebLoggerTargetConfig extends LoggerTargetConfig {
-    public endpoint: string;
-    public secret?: string;
+    endpoint: string;
+    secret?: string;
 }

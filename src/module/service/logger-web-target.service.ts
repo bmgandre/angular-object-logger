@@ -1,14 +1,14 @@
-import { Injectable, Inject, Optional } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoggerTargetService } from './logger-target-service.model';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { LogEntry } from './log-entry.model';
 import { LogLevel } from './log-level.model';
 import { WebLoggerTargetConfig } from './logger-target-config.model';
+import { LoggerTargetService } from './logger-target-service.model';
 
 @Injectable()
 export class LoggerWebTargetService extends LoggerTargetService {
 
-    public constructor(
+    constructor(
         @Optional() private targetConfig: WebLoggerTargetConfig,
         private http: HttpClient
     ) {
@@ -25,7 +25,7 @@ export class LoggerWebTargetService extends LoggerTargetService {
             }
 
             this.http
-                .post(this.targetConfig.endpoint, entry, { headers: headers })
+                .post(this.targetConfig.endpoint, entry, { headers })
                 .subscribe();
         }
     }

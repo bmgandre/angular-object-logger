@@ -1,21 +1,21 @@
-import { Injectable, Inject, Optional } from '@angular/core';
-import { LoggerTargetService  } from './logger-target-service.model';
-import { LoggerService } from './logger.service';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable, Optional } from '@angular/core';
 import {
-    LoggerConfig,
-    ConsoleLoggerTargetConfig,
-    WebLoggerTargetConfig
-} from './logger-target-config.model';
-import {
-    MinMaxLevelLogFilter,
     FixedLevelLogFilter,
-    MultiLevelLogFilter,
-    LogFilter
+    LogFilter,
+    MinMaxLevelLogFilter,
+    MultiLevelLogFilter
 } from './log-filter.model';
 import { LogLevel } from './log-level.model';
 import { LoggerConsoleTargetService } from './logger-console-target.service';
+import {
+    ConsoleLoggerTargetConfig,
+    LoggerConfig,
+    WebLoggerTargetConfig
+} from './logger-target-config.model';
+import { LoggerTargetService } from './logger-target-service.model';
 import { LoggerWebTargetService } from './logger-web-target.service';
-import { HttpClient } from '@angular/common/http';
+import { LoggerService } from './logger.service';
 
 export class LoggerFactoryConfig {
     [key: string]: any;
@@ -24,73 +24,36 @@ export class LoggerFactoryConfig {
 @Injectable()
 export class LoggerFactoryService {
     private loggerConfig: LoggerConfig;
-    private loggerTargets: LoggerTargetService[] = [];
+    private loggerTargets: Array<LoggerTargetService> = [];
 
-    public constructor(
-        private config: LoggerFactoryConfig,
-        private http: HttpClient
-    ) {
-        this.loadTargetsFromEnvironment();
+    private static sourceOrDefaultSource(obj: any): string {
+        const source = obj ? obj as string : '.*';
+
+        return source;
     }
 
-    public createLogger<T>(obj: T): LoggerService {
-        const logger = new LoggerService(this.loggerTargets);
-        logger.source = obj.constructor.name;
-        return logger;
+    private static parseGlobalFilters(obj: any): Array<LogFilter> {
+        return LoggerFactoryService.parseRuleSet(obj);
     }
 
-    private loadTargetsFromEnvironment(): void {
-        this.loggerConfig = this.parseEnvironment();
-        if (this.loggerConfig.consoleTarget) {
-            this.loggerTargets.push(new LoggerConsoleTargetService(this.loggerConfig.consoleTarget));
-        }
-        if (this.loggerConfig.webTarget) {
-            this.loggerTargets.push(new LoggerWebTargetService(this.loggerConfig.webTarget, this.http));
-        }
-    }
-
-    private parseEnvironment(): LoggerConfig {
-        const loggerConfig = new LoggerConfig();
-        let globalFilters: LogFilter[] = [];
-
-        if (this.config.logger) {
-            if (this.config.logger.filters) {
-                globalFilters = this.parseGlobalFilters(this.config.logger.filters);
-            }
-
-            if (this.config.logger.consoleTarget) {
-                loggerConfig.consoleTarget = this.parseConsoleTarget(this.config.logger.consoleTarget, globalFilters);
-            }
-
-            if (this.config.logger.webTarget) {
-                loggerConfig.webTarget = this.parseWebTarget(this.config.logger.webTarget, globalFilters);
-            }
-        }
-
-        return loggerConfig;
-    }
-
-    private parseGlobalFilters(obj: any): LogFilter[] {
-        return this.parseRuleSet(obj);
-    }
-
-    private parseConsoleTarget(obj: any, globalFilters: LogFilter[]): ConsoleLoggerTargetConfig {
+    private static parseConsoleTarget(obj: any, globalFilters: Array<LogFilter>): ConsoleLoggerTargetConfig {
         const consoleTargetConfig = new ConsoleLoggerTargetConfig();
 
         if (obj.filters) {
-            const rules = this.parseRuleSet(obj.filters);
+            const rules = LoggerFactoryService.parseRuleSet(obj.filters);
             consoleTargetConfig.filters = rules;
         }
 
         consoleTargetConfig.filters = consoleTargetConfig.filters.concat(globalFilters);
+
         return consoleTargetConfig;
     }
 
-    private parseWebTarget(obj: any, globalFilters: LogFilter[]): WebLoggerTargetConfig {
+    private static parseWebTarget(obj: any, globalFilters: Array<LogFilter>): WebLoggerTargetConfig {
         const webLoggerTargetConfig = new WebLoggerTargetConfig();
 
         if (obj.filters) {
-            const rules = this.parseRuleSet(obj.filters);
+            const rules = LoggerFactoryService.parseRuleSet(obj.filters);
             webLoggerTargetConfig.filters = rules;
         }
 
@@ -107,10 +70,10 @@ export class LoggerFactoryService {
         return webLoggerTargetConfig;
     }
 
-    private parseRuleSet(obj: any): LogFilter[] {
-        const filters: LogFilter[] = [];
+    private static parseRuleSet(obj: any): Array<LogFilter> {
+        const filters: Array<LogFilter> = [];
         obj.forEach((element: any) => {
-            const rule = this.parseRule(element);
+            const rule = LoggerFactoryService.parseRule(element);
             if (rule) {
                 filters.push(rule);
             }
@@ -119,47 +82,49 @@ export class LoggerFactoryService {
         return filters;
     }
 
-    private parseRule(obj: any): LogFilter | null {
+    private static parseRule(obj: any): LogFilter | undefined {
         if (obj.minlevel || obj.maxlevel) {
-            return this.parseMinMaxRule(obj);
+            return LoggerFactoryService.parseMinMaxRule(obj);
         } else if (obj.level) {
-            return this.parseFixedRule(obj);
+            return LoggerFactoryService.parseFixedRule(obj);
         } else if (obj.levels) {
-            return this.parseMultiLevelRule(obj);
+            return LoggerFactoryService.parseMultiLevelRule(obj);
         }
 
-        return null;
+        return undefined;
     }
 
-    private parseMinMaxRule(obj: any): MinMaxLevelLogFilter {
+    private static parseMinMaxRule(obj: any): MinMaxLevelLogFilter {
         const minlevel = obj.minlevel
-            ? LogLevel[obj.minlevel.toLowerCase() as string]
+            ? LogLevel[obj.minlevel.toLowerCase() as keyof typeof LogLevel]
             : LogLevel.trace;
 
         const maxlevel = obj.maxlevel
-            ? LogLevel[obj.maxlevel.toLowerCase() as string]
+            ? LogLevel[obj.maxlevel.toLowerCase() as keyof typeof LogLevel]
             : LogLevel.fatal;
 
-        const source = this.sourceOrDefaultSource(obj.source);
+        const source = LoggerFactoryService.sourceOrDefaultSource(obj.source);
+
         return new MinMaxLevelLogFilter(source, minlevel, maxlevel);
     }
 
-    private parseFixedRule(obj: any): FixedLevelLogFilter {
+    private static  parseFixedRule(obj: any): FixedLevelLogFilter {
         const level = obj.level
-            ? LogLevel[obj.level as string]
+            ? LogLevel[obj.level as keyof typeof LogLevel]
             : LogLevel.trace;
 
-        const source = this.sourceOrDefaultSource(obj.source);
+        const source = LoggerFactoryService.sourceOrDefaultSource(obj.source);
+
         return new FixedLevelLogFilter(source, level);
     }
 
-    private parseMultiLevelRule(obj: any): MultiLevelLogFilter {
-        const source = this.sourceOrDefaultSource(obj.source);
-        let levels: LogLevel[] = [];
+    private static parseMultiLevelRule(obj: any): MultiLevelLogFilter {
+        const source = LoggerFactoryService.sourceOrDefaultSource(obj.source);
+        let levels: Array<LogLevel> = [];
 
         if (obj.levels) {
             obj.levels.forEach((element: any) => {
-                levels.push(LogLevel[element as string]);
+                levels.push(LogLevel[element as keyof typeof LogLevel]);
             });
         } else {
             levels = [
@@ -175,8 +140,49 @@ export class LoggerFactoryService {
         return new MultiLevelLogFilter(source, levels);
     }
 
-    private sourceOrDefaultSource(obj: any): string {
-        const source = obj ? obj as string : '.*';
-        return source;
+    constructor(
+        private config: LoggerFactoryConfig,
+        private http: HttpClient
+    ) {
+        this.loadTargetsFromEnvironment();
+    }
+
+    createLogger<T>(obj: T): LoggerService {
+        const logger = new LoggerService(this.loggerTargets);
+        logger.source = obj.constructor.name;
+
+        return logger;
+    }
+
+    private loadTargetsFromEnvironment(): void {
+        this.loggerConfig = this.parseEnvironment();
+        if (this.loggerConfig.consoleTarget) {
+            this.loggerTargets.push(new LoggerConsoleTargetService(this.loggerConfig.consoleTarget));
+        }
+
+        if (this.loggerConfig.webTarget) {
+            this.loggerTargets.push(new LoggerWebTargetService(this.loggerConfig.webTarget, this.http));
+        }
+    }
+
+    private parseEnvironment(): LoggerConfig {
+        const loggerConfig = new LoggerConfig();
+        let globalFilters: Array<LogFilter> = [];
+
+        if (this.config.logger) {
+            if (this.config.logger.filters) {
+                globalFilters = LoggerFactoryService.parseGlobalFilters(this.config.logger.filters);
+            }
+
+            if (this.config.logger.consoleTarget) {
+                loggerConfig.consoleTarget = LoggerFactoryService.parseConsoleTarget(this.config.logger.consoleTarget, globalFilters);
+            }
+
+            if (this.config.logger.webTarget) {
+                loggerConfig.webTarget = LoggerFactoryService.parseWebTarget(this.config.logger.webTarget, globalFilters);
+            }
+        }
+
+        return loggerConfig;
     }
 }

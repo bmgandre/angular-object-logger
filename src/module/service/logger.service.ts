@@ -1,95 +1,105 @@
-import { Injectable, Inject } from '@angular/core';
-import { LoggerTargetService } from './logger-target-service.model';
-import {
-    LogEntry,
-    TraceLogEntry,
-    DebugLogEntry,
-    InfoLogEntry,
-    WarnLogEntry,
-    ErrorLogEntry,
-    FatalLogEntry,
-    LogSource
-  } from './log-entry.model';
+import { Inject, Injectable } from '@angular/core';
 import * as StackTrace from 'stacktrace-js';
+import {
+  DebugLogEntry,
+  ErrorLogEntry,
+  FatalLogEntry,
+  InfoLogEntry,
+  LogEntry,
+  LogSource,
+  TraceLogEntry,
+  WarnLogEntry
+} from './log-entry.model';
+import { LoggerTargetService } from './logger-target-service.model';
 
+// @dynamic
 @Injectable()
 export class LoggerService {
-  public source: string;
+  source: string;
 
-  public constructor(
-    @Inject(LoggerTargetService) private targets: LoggerTargetService[]
-  ) { }
-
-  public trace(message: string, ...args: any[]): void;
-  public trace(messageOrObject: string | any, exception?: Error): void;
-  public trace(objOrmessage: string | any, ...exceptionOrRestArguments: any[]): void {
-    StackTrace.get().then((sf) => {
-      this.parseLog(new TraceLogEntry(this.source), this.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
-    });
-  }
-
-  public debug(message: string, ...args: any[]): void;
-  public debug(messageOrObject: string | any, exception?: Error): void;
-  public debug(objOrmessage: string | any, ...exceptionOrRestArguments: any[]): void {
-    StackTrace.get().then((sf) => {
-      this.parseLog(new DebugLogEntry(this.source), this.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
-    });
-  }
-
-  public info(message: string, ...args: any[]): void;
-  public info(messageOrObject: string | any, exception?: Error): void;
-  public info(objOrmessage: string | any, ...exceptionOrRestArguments: any[]): void {
-    StackTrace.get().then((sf) => {
-      this.parseLog(new InfoLogEntry(this.source), this.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
-    });
-  }
-
-  public warn(message: string, ...args: any[]): void;
-  public warn(messageOrObject: string | any, exception?: Error): void;
-  public warn(objOrmessage: string | any, ...exceptionOrRestArguments: any[]): void {
-    StackTrace.get().then((sf) => {
-      this.parseLog(new WarnLogEntry(this.source), this.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
-    });
-  }
-
-  public error(message: string, ...args: any[]): void;
-  public error(messageOrObject: string | any, exception?: Error): void;
-  public error(objOrmessage: string | any, ...exceptionOrRestArguments: any[]): void {
-    StackTrace.get().then((sf) => {
-      this.parseLog(new ErrorLogEntry(this.source), this.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
-    });
-  }
-
-  public fatal(message: string, ...args: any[]): void;
-  public fatal(messageOrObject: string | any, exception?: Error): void;
-  public fatal(objOrmessage: string | any, ...exceptionOrRestArguments: any[]): void {
-    StackTrace.get().then((sf) => {
-      this.parseLog(new FatalLogEntry(this.source), this.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
-    });
-  }
-
-  private format(str: string, applyFunction: (obj: any) => string, ...args: any[]): string {
-    return str.replace(/{(\d+)}/g, function (match, number) {
-      return typeof args[number] !== 'undefined'
-        ? applyFunction(args[number])
+  private static format(str: string, applyFunction: (obj: any) => string, ...args: Array<any>): string {
+    return str.replace(/{(\d+)}/g, (match, index) => {
+      return typeof args[index] !== 'undefined'
+        ? applyFunction(args[index])
         : match;
     });
   }
 
-  private parseLogSource(stackframeList: StackTrace.StackFrame[]): LogSource {
+  private static parseLogSource(stackframeList: Array<StackTrace.StackFrame>): LogSource {
     const stackframe = stackframeList[1];
+    const stack = stackframeList.map(sf => sf.toString())
+      .join('\n');
+
     return {
+      file: stackframe.fileName,
+      line: stackframe.lineNumber,
       method: stackframe.functionName,
       path: stackframe.source,
-      line: stackframe.lineNumber,
       pos: stackframe.columnNumber,
-      file: stackframe.fileName,
-      stack: stackframeList.map(sf => sf.toString()).join('\n')
+      stack
     };
   }
 
+  constructor(
+    @Inject(LoggerTargetService) private targets: Array<LoggerTargetService>
+  ) { }
+
+  trace(message: string, ...args: Array<any>): void;
+  trace(messageOrObject: string | any, exception?: Error): void;
+  trace(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
+    StackTrace.get()
+      .then(sf => {
+        this.parseLog(new TraceLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
+      });
+  }
+
+  debug(message: string, ...args: Array<any>): void;
+  debug(messageOrObject: string | any, exception?: Error): void;
+  debug(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
+    StackTrace.get()
+      .then(sf => {
+        this.parseLog(new DebugLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
+      });
+  }
+
+  info(message: string, ...args: Array<any>): void;
+  info(messageOrObject: string | any, exception?: Error): void;
+  info(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
+    StackTrace.get()
+      .then(sf => {
+        this.parseLog(new InfoLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
+      });
+  }
+
+  warn(message: string, ...args: Array<any>): void;
+  warn(messageOrObject: string | any, exception?: Error): void;
+  warn(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
+    StackTrace.get()
+      .then(sf => {
+        this.parseLog(new WarnLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
+      });
+  }
+
+  error(message: string, ...args: Array<any>): void;
+  error(messageOrObject: string | any, exception?: Error): void;
+  error(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
+    StackTrace.get()
+      .then(sf => {
+        this.parseLog(new ErrorLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
+      });
+  }
+
+  fatal(message: string, ...args: Array<any>): void;
+  fatal(messageOrObject: string | any, exception?: Error): void;
+  fatal(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
+    StackTrace.get()
+      .then(sf => {
+        this.parseLog(new FatalLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
+      });
+  }
+
   private parseLog(baseLogEntry: LogEntry, logSource: LogSource,
-    objOrmessage: string | any, ...exceptionOrRestArguments: any[]): void {
+                   objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
     if (typeof objOrmessage === 'string') {
       if (exceptionOrRestArguments[0] instanceof Error) {
         this.logMessageWithException(baseLogEntry, logSource, objOrmessage, exceptionOrRestArguments[0] as Error);
@@ -102,32 +112,32 @@ export class LoggerService {
   }
 
   private logMessageWithFormat(baseLogEntry: LogEntry, logSource: LogSource,
-    message: string, ...args: any[]): void {
-    const objToString = function(obj: any): string {
+                               message: string, ...args: Array<any>): void {
+    const objToString = (obj: any): string => {
       if (typeof obj === 'object') {
         return JSON.stringify(obj);
       } else {
         return obj;
       }
     };
-    const entry = { ...baseLogEntry, source: logSource, message: this.format(message, objToString, ...args) };
+    const entry = { ...baseLogEntry, source: logSource, message: LoggerService.format(message, objToString, ...args) };
     this.targets.forEach(x => x.log(entry));
   }
 
   private logMessageWithException(baseLogEntry: LogEntry, logSource: LogSource,
-    message: string, exception?: Error): void {
+                                  message: string, exception?: Error): void {
     const logEntry = typeof exception === 'undefined'
-      ? { ...baseLogEntry, source: logSource, message: message }
-      : { ...baseLogEntry, source: logSource, message: message, exception: exception };
+      ? { ...baseLogEntry, source: logSource, message }
+      : { ...baseLogEntry, source: logSource, message, exception };
 
     this.targets.forEach(x => x.log(logEntry));
   }
 
   private logObject(baseLogEntry: LogEntry, logSource: LogSource,
-    obj: any, exception?: Error): void {
+                    obj: any, exception?: Error): void {
     const logEntry = typeof exception === 'undefined'
       ? { ...baseLogEntry, source: logSource, object: obj }
-      : { ...baseLogEntry, source: logSource, object: obj, exception: exception };
+      : { ...baseLogEntry, source: logSource, object: obj, exception };
 
     this.targets.forEach(x => x.log(logEntry));
   }

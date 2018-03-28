@@ -1,12 +1,12 @@
 import { LogLevel } from './log-level.model';
 
 export class LogSource {
-    public method?: string;
-    public path?: string;
-    public line?: number;
-    public pos?: number;
-    public file?: string;
-    public stack?: string;
+    method?: string;
+    path?: string;
+    line?: number;
+    pos?: number;
+    file?: string;
+    stack?: string;
 }
 
 export class LogEntry {
@@ -21,9 +21,9 @@ export class TraceLogEntry implements LogEntry {
     timestamp: Date = new Date();
     source?: LogSource;
 
-    public constructor(
-        public logger: string
-    ) { }
+    constructor(
+        readonly logger: string
+    ) {}
 }
 
 export class DebugLogEntry implements LogEntry {
@@ -31,9 +31,9 @@ export class DebugLogEntry implements LogEntry {
     timestamp: Date = new Date();
     source?: LogSource;
 
-    public constructor(
-        public logger: string
-    ) { }
+    constructor(
+        readonly logger: string
+    ) {}
 }
 
 export class InfoLogEntry implements LogEntry {
@@ -41,9 +41,9 @@ export class InfoLogEntry implements LogEntry {
     timestamp: Date = new Date();
     source?: LogSource;
 
-    public constructor(
-        public logger: string
-    ) { }
+    constructor(
+        readonly logger: string
+    ) {}
 }
 
 export class WarnLogEntry implements LogEntry {
@@ -51,9 +51,9 @@ export class WarnLogEntry implements LogEntry {
     timestamp: Date = new Date();
     source?: LogSource;
 
-    public constructor(
-        public logger: string
-    ) { }
+    constructor(
+        readonly logger: string
+    ) {}
 }
 
 export class ErrorLogEntry implements LogEntry {
@@ -61,9 +61,9 @@ export class ErrorLogEntry implements LogEntry {
     timestamp: Date = new Date();
     source?: LogSource;
 
-    public constructor(
-        public logger: string
-    ) { }
+    constructor(
+        readonly logger: string
+    ) {}
 }
 
 export class FatalLogEntry implements LogEntry {
@@ -71,7 +71,13 @@ export class FatalLogEntry implements LogEntry {
     timestamp: Date = new Date();
     source?: LogSource;
 
-    public constructor(
-        public logger: string
-    ) { }
+    constructor(
+        readonly logger: string
+    ) {}
+}
+
+export class InvalidLogEntryError extends Error {
+    constructor(message: string) {
+        super(message);
+    }
 }

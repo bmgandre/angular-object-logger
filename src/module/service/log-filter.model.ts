@@ -4,9 +4,13 @@ export abstract class LogFilter {
     private source: string;
     private regexp: RegExp;
 
-    public constructor(source: string) {
+    constructor(source: string) {
         this.source = source;
         this.regexp = new RegExp(source);
+    }
+
+    IsMatch(source: string, level: LogLevel): boolean {
+        return this.IsSourceMatch(source) && this.IsLevelMatch(level);
     }
 
     protected IsSourceMatch(term: string): boolean {
@@ -14,14 +18,10 @@ export abstract class LogFilter {
     }
 
     protected abstract IsLevelMatch(level: LogLevel): boolean;
-
-    public IsMatch(source: string, level: LogLevel): boolean {
-        return this.IsSourceMatch(source) && this.IsLevelMatch(level);
-    }
 }
 
 export class MinMaxLevelLogFilter extends LogFilter {
-    public constructor(
+    constructor(
         source: string,
         private minlevel: LogLevel = LogLevel.trace,
         private maxlevel: LogLevel = LogLevel.fatal
@@ -29,33 +29,33 @@ export class MinMaxLevelLogFilter extends LogFilter {
         super(source);
     }
 
-    public IsLevelMatch(level: LogLevel): boolean {
+    IsLevelMatch(level: LogLevel): boolean {
         return this.minlevel <= level && level <= this.maxlevel;
     }
 }
 
 export class FixedLevelLogFilter extends LogFilter {
-    public constructor(
+    constructor(
         source: string,
         private level: LogLevel
     ) {
         super(source);
     }
 
-    public IsLevelMatch(level: LogLevel): boolean {
+    IsLevelMatch(level: LogLevel): boolean {
         return this.level === level;
     }
 }
 
 export class MultiLevelLogFilter extends LogFilter {
-    public constructor(
+    constructor(
         source: string,
-        private levels: LogLevel[]
+        private levels: Array<LogLevel>
     ) {
         super(source);
     }
 
-    public IsLevelMatch(level: LogLevel): boolean {
+    IsLevelMatch(level: LogLevel): boolean {
         return this.levels.indexOf(level) > 0;
     }
 }
