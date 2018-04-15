@@ -1,4 +1,4 @@
-import { LogFilter, MinMaxLevelLogFilter } from './log-filter.model';
+import { LogFilter } from './filter/log-filter';
 
 export class LoggerConfig {
     filters?: Array<LogFilter> = [];

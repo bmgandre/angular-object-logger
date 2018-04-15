@@ -1,5 +1,5 @@
-import { MinMaxLevelLogFilter } from './log-filter.model';
-import { LogLevel } from './log-level.model';
+import { LogLevel } from '../log-level.model';
+import { MinMaxLevelLogFilter } from './min-max-level-log-filter';
 
 describe('Filter logs with minimal and maximal values', () => {
 
@@ -8,7 +8,7 @@ describe('Filter logs with minimal and maximal values', () => {
         describe('when log is received', () => {
             test(`then ${LogLevel[LogLevel.trace]} is accepted`, () => {
                 expect(logFilter.IsLevelMatch(LogLevel.trace))
-                .toBeTruthy();
+                    .toBeTruthy();
             });
             test(`then ${LogLevel[LogLevel.debug]} is accepted`, () => {
                 expect(logFilter.IsLevelMatch(LogLevel.debug))

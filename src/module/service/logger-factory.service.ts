@@ -1,21 +1,15 @@
+import { ConsoleLoggerTargetConfig, LoggerConfig, WebLoggerTargetConfig } from './logger-target-config.model';
+import { FixedLevelLogFilter } from './filter/fixed-level-log-filter';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
-import {
-    FixedLevelLogFilter,
-    LogFilter,
-    MinMaxLevelLogFilter,
-    MultiLevelLogFilter
-} from './log-filter.model';
-import { LogLevel } from './log-level.model';
+import { LogFilter } from './filter/log-filter';
 import { LoggerConsoleTargetService } from './logger-console-target.service';
-import {
-    ConsoleLoggerTargetConfig,
-    LoggerConfig,
-    WebLoggerTargetConfig
-} from './logger-target-config.model';
+import { LoggerService } from './logger.service';
 import { LoggerTargetService } from './logger-target-service.model';
 import { LoggerWebTargetService } from './logger-web-target.service';
-import { LoggerService } from './logger.service';
+import { LogLevel } from './log-level.model';
+import { MinMaxLevelLogFilter } from './filter/min-max-level-log-filter';
+import { MultiLevelLogFilter } from './filter/multi-level-log-filter';
 
 export class LoggerFactoryConfig {
     [key: string]: any;
