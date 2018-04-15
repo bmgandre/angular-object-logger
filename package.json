@@ -13,9 +13,9 @@
     "playground:lint": "npm run build && tslint --type-check --project playground/tsconfig.json",
     "playground:build": "tsc -p playground -w",
     "playground": "concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run lite\"",
-    "test": "jest --config jest.config.json",
-    "test:watch": "jest --config jest.config.json --watch",
-    "test:ci": "jest --config jest.config.json --runInBand"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand"
   },
   "repository": {
     "type": "git",
