@@ -10,7 +10,7 @@ import {
   TraceLogEntry,
   WarnLogEntry
 } from './log-entry.model';
-import { LoggerTargetService } from './logger-target-service.model';
+import { LoggerTargetService } from './target/logger-target-service';
 
 // @dynamic
 @Injectable()
