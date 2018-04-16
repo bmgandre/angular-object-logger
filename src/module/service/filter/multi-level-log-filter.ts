@@ -10,6 +10,6 @@ export class MultiLevelLogFilter extends LogFilter {
     }
 
     IsLevelMatch(level: LogLevel): boolean {
-        return this.levels.indexOf(level) > 0;
+        return this.levels.indexOf(level) >= 0;
     }
 }
