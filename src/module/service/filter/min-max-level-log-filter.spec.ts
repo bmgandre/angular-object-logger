@@ -212,4 +212,94 @@ describe('Filter logs with minimal and maximal values', () => {
             });
         });
     });
+
+    describe('given the log filter source is HomeComponent', () => {
+        const level = LogLevel.debug;
+        const source = 'HomeComponent';
+        const logFilter = new MinMaxLevelLogFilter(source);
+
+        describe('when a log is received', () => {
+            test(`then ${source} source is accepted`, () => {
+                expect(logFilter.IsMatch(source, level))
+                    .toBeTruthy();
+            });
+            test(`then ${'AppComponent'} source is rejected`, () => {
+                expect(logFilter.IsMatch('AppComponent', level))
+                    .toBeFalsy();
+            });
+            test(`then ${'LoggerService'} source is rejected`, () => {
+                expect(logFilter.IsMatch('LoggerService', level))
+                    .toBeFalsy();
+            });
+
+            test(`then ${'Home'} source is rejected`, () => {
+                expect(logFilter.IsMatch('Home', level))
+                    .toBeFalsy();
+            });
+
+            test(`then ${'Component'} source is rejected`, () => {
+                expect(logFilter.IsMatch('Component', level))
+                    .toBeFalsy();
+            });
+        });
+    });
+
+    describe('given the log filter source is .*Component', () => {
+        const level = LogLevel.error;
+        const source = '.*Component';
+        const logFilter = new MinMaxLevelLogFilter(source);
+
+        describe('when a log is received', () => {
+            test(`then ${'AppComponent'} source is accepted`, () => {
+                expect(logFilter.IsMatch('AppComponent', level))
+                    .toBeTruthy();
+            });
+            test(`then ${'LoggerService'} source is rejected`, () => {
+                expect(logFilter.IsMatch('LoggerService', level))
+                    .toBeFalsy();
+            });
+
+            test(`then ${'Home'} source is rejected`, () => {
+                expect(logFilter.IsMatch('Home', level))
+                    .toBeFalsy();
+            });
+
+            test(`then ${'Component'} source is accepted`, () => {
+                expect(logFilter.IsMatch('Component', level))
+                    .toBeTruthy();
+            });
+        });
+    });
+
+    describe('given the log filter source is Home.*', () => {
+        const level = LogLevel.error;
+        const source = 'Home.*';
+        const logFilter = new MinMaxLevelLogFilter(source);
+
+        describe('when a log is received', () => {
+            test(`then ${'AppComponent'} source is rejected`, () => {
+                expect(logFilter.IsMatch('AppComponent', level))
+                    .toBeFalsy();
+            });
+            test(`then ${'LoggerService'} source is rejected`, () => {
+                expect(logFilter.IsMatch('LoggerService', level))
+                    .toBeFalsy();
+            });
+
+            test(`then ${'Home'} source is accepted`, () => {
+                expect(logFilter.IsMatch('Home', level))
+                    .toBeTruthy();
+            });
+
+            test(`then ${'Home'}Component source is accepted`, () => {
+                expect(logFilter.IsMatch('HomeComponent', level))
+                    .toBeTruthy();
+            });
+
+            test(`then ${'Component'} source is rejected`, () => {
+                expect(logFilter.IsMatch('Component', level))
+                    .toBeFalsy();
+            });
+        });
+    });
 });
