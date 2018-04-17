@@ -44,24 +44,14 @@ export class LoggerFactoryService {
     }
 
     private static parseWebTarget(obj: any, globalFilters: Array<LogFilter>): WebLoggerTargetConfig {
-        const webLoggerTargetConfig = new WebLoggerTargetConfig();
+        const rules = (obj.filters)
+            ? LoggerFactoryService.parseRuleSet(obj.filters)
+            : Array<LogFilter>();
+        rules.concat(globalFilters);
 
-        if (obj.filters) {
-            const rules = LoggerFactoryService.parseRuleSet(obj.filters);
-            webLoggerTargetConfig.filters = rules;
-        }
+        const targetConfig = new WebLoggerTargetConfig(rules, obj.endpoint, obj.secret);
 
-        webLoggerTargetConfig.filters = webLoggerTargetConfig.filters.concat(globalFilters);
-
-        if (obj.endpoint) {
-            webLoggerTargetConfig.endpoint = obj.endpoint;
-        }
-
-        if (obj.secret) {
-            webLoggerTargetConfig.secret = obj.secret;
-        }
-
-        return webLoggerTargetConfig;
+        return targetConfig;
     }
 
     private static parseRuleSet(obj: any): Array<LogFilter> {

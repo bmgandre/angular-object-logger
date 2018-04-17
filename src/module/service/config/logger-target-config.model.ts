@@ -7,13 +7,25 @@ export class LoggerConfig {
 }
 
 export class LoggerTargetConfig {
-    filters?: Array<LogFilter> = [];
+    constructor(
+        public filters: Array<LogFilter> = []
+    ) {}
 }
 
 export class ConsoleLoggerTargetConfig extends LoggerTargetConfig {
+    constructor(
+        filters: Array<LogFilter> = []
+    ) {
+        super(filters);
+    }
 }
 
 export class WebLoggerTargetConfig extends LoggerTargetConfig {
-    endpoint: string;
-    secret?: string;
+    constructor(
+        filters: Array<LogFilter> = [],
+        public endpoint: string,
+        public secret: string
+    ) {
+        super(filters);
+    }
 }

@@ -77,7 +77,8 @@
     "setupTestFrameworkScriptFile": "<rootDir>/src/jest.ts",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/module/**/*.{ts}"
+      "src/module/**/*.{ts}",
+      "!src/module/lib.module.ts"
     ],
     "coverageDirectory": "coverage"
   }

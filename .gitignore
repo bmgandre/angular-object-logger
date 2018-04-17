@@ -76,6 +76,7 @@ src/**/*.d.ts
 playground/*.js
 playground/*.map
 playground/*.d.ts
+build/
 
 # JetBrains
 .idea
