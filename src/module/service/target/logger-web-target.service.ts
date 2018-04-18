@@ -17,11 +17,11 @@ export class LoggerWebTargetService extends LoggerTargetService {
 
     protected writeLog(entry: LogEntry): void {
         if (this.targetConfig.endpoint) {
-            const headers = new HttpHeaders()
+            let headers = new HttpHeaders()
                 .append('Content-Type', 'application/json');
 
             if (this.targetConfig.secret) {
-                headers.append('Authorization', this.targetConfig.secret);
+                headers = headers.append('Authorization', this.targetConfig.secret);
             }
 
             this.http
