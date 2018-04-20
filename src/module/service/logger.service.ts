@@ -46,8 +46,8 @@ export class LoggerService {
 
   trace(message: string, ...args: Array<any>): void;
   trace(messageOrObject: string | any, exception?: Error): void;
-  trace(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
-    StackTrace.get()
+  trace(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): Promise<void> {
+    return StackTrace.get()
       .then(sf => {
         this.parseLog(new TraceLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
       });
@@ -55,8 +55,8 @@ export class LoggerService {
 
   debug(message: string, ...args: Array<any>): void;
   debug(messageOrObject: string | any, exception?: Error): void;
-  debug(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
-    StackTrace.get()
+  debug(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): Promise<void> {
+    return StackTrace.get()
       .then(sf => {
         this.parseLog(new DebugLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
       });
@@ -64,8 +64,8 @@ export class LoggerService {
 
   info(message: string, ...args: Array<any>): void;
   info(messageOrObject: string | any, exception?: Error): void;
-  info(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
-    StackTrace.get()
+  info(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): Promise<void> {
+    return StackTrace.get()
       .then(sf => {
         this.parseLog(new InfoLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
       });
@@ -73,8 +73,8 @@ export class LoggerService {
 
   warn(message: string, ...args: Array<any>): void;
   warn(messageOrObject: string | any, exception?: Error): void;
-  warn(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
-    StackTrace.get()
+  warn(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): Promise<void> {
+    return StackTrace.get()
       .then(sf => {
         this.parseLog(new WarnLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
       });
@@ -82,8 +82,8 @@ export class LoggerService {
 
   error(message: string, ...args: Array<any>): void;
   error(messageOrObject: string | any, exception?: Error): void;
-  error(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
-    StackTrace.get()
+  error(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): Promise<void> {
+    return StackTrace.get()
       .then(sf => {
         this.parseLog(new ErrorLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
       });
@@ -91,8 +91,8 @@ export class LoggerService {
 
   fatal(message: string, ...args: Array<any>): void;
   fatal(messageOrObject: string | any, exception?: Error): void;
-  fatal(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): void {
-    StackTrace.get()
+  fatal(objOrmessage: string | any, ...exceptionOrRestArguments: Array<any>): Promise<void> {
+    return StackTrace.get()
       .then(sf => {
         this.parseLog(new FatalLogEntry(this.source), LoggerService.parseLogSource(sf), objOrmessage, ...exceptionOrRestArguments);
       });

@@ -7,10 +7,8 @@
     "module": "commonjs",
     "target": "es6",
     "baseUrl": "",
-    "types": [
-      "jest",
-      "node"
-    ]
+    "allowJs": true,
+    "types": []
   },
   "files": [
     "**/*.spec.ts"
