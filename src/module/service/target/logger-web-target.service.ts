@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
 import { LogEntry } from '../log-entry.model';
 import { LogLevel } from '../log-level.model';
-import { WebLoggerTargetConfig } from '../config/logger-target-config';
+import { WebLoggerTargetConfig } from '../config/web-logger-target-config';
 import { LoggerTargetService } from './logger-target-service';
 
 @Injectable()

@@ -12,7 +12,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { LoggerWebTargetService } from './logger-web-target.service';
 import { MinMaxLevelLogFilter } from '../filter/min-max-level-log-filter';
 import { TestBed } from '@angular/core/testing';
-import { WebLoggerTargetConfig } from '../config/logger-target-config';
+import { WebLoggerTargetConfig } from '../config/web-logger-target-config';
 
 describe('Web target service', () => {
     const url = 'http://localhost:5566/';

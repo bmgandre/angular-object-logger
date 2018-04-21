@@ -1,4 +1,4 @@
-import { ConsoleLoggerTargetConfig } from '../config/logger-target-config';
+import { ConsoleLoggerTargetConfig } from '../config/console-logger-target-config';
 import {
     DebugLogEntry,
     ErrorLogEntry,
