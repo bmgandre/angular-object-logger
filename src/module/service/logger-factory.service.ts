@@ -1,4 +1,4 @@
-import { ConsoleLoggerTargetConfig, LoggerConfig, WebLoggerTargetConfig } from './config/logger-target-config.model';
+import { ConsoleLoggerTargetConfig, LoggerConfig, WebLoggerTargetConfig } from './config/logger-target-config';
 import { FixedLevelLogFilter } from './filter/fixed-level-log-filter';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
