@@ -1,9 +1,11 @@
 import { LogLevel } from '../log-level.model';
 import { MultiLevelLogFilter } from '../filter/multi-level-log-filter';
 import { SourceParser } from './source-parser';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class MultiLevelLogFilterParser {
-    static parse(obj: any): MultiLevelLogFilter {
+    parse(obj: any): MultiLevelLogFilter {
         const source = SourceParser.sourceOrDefaultSource(obj.source);
         let levels: Array<LogLevel> = [];
 

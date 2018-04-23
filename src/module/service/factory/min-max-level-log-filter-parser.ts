@@ -2,9 +2,11 @@ import { LoggerFactoryService } from './logger-factory.service';
 import { LogLevel } from '../log-level.model';
 import { MinMaxLevelLogFilter } from '../filter/min-max-level-log-filter';
 import { SourceParser } from './source-parser';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class MinMaxLevelLogFilterParser {
-    static parse(obj: any): MinMaxLevelLogFilter {
+    parse(obj: any): MinMaxLevelLogFilter {
         const minlevel = obj.minlevel
             ? LogLevel[obj.minlevel.toLowerCase() as keyof typeof LogLevel]
             : LogLevel.trace;

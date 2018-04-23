@@ -1,9 +1,11 @@
 import { FixedLevelLogFilter } from '../filter/fixed-level-log-filter';
 import { LogLevel } from '../log-level.model';
 import { SourceParser } from './source-parser';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class FixedLevelLogFilterParser {
-    static  parse(obj: any): FixedLevelLogFilter {
+    parse(obj: any): FixedLevelLogFilter {
         const level = obj.level
             ? LogLevel[obj.level as keyof typeof LogLevel]
             : LogLevel.trace;

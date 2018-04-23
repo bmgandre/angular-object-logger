@@ -10,7 +10,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {
   LoggerServiceModule,
   LoggerService,
-  LoggerFactoryConfig,
+  LoggerEnvironmentConfig,
   LoggerFactoryService
 } from 'angular-object-logger';
 
@@ -82,8 +82,7 @@ class AppComponent {
   bootstrap: [AppComponent],
   declarations: [AppComponent],
   providers: [
-    LoggerFactoryService,
-    { provide: LoggerFactoryConfig, useValue: environment }
+    { provide: LoggerEnvironmentConfig, useValue: environment }
   ],
   imports: [BrowserModule, HttpClientModule, LoggerServiceModule]
 })
