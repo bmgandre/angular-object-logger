@@ -17,7 +17,9 @@ export class ConsoleTargetParser {
             consoleTargetConfig.filters = rules;
         }
 
-        consoleTargetConfig.filters = consoleTargetConfig.filters.concat(globalFilters);
+        if (globalFilters) {
+            consoleTargetConfig.filters = consoleTargetConfig.filters.concat(globalFilters);
+        }
 
         return consoleTargetConfig;
     }
