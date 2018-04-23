@@ -1,6 +1,5 @@
-import { LoggerFactoryService } from './logger-factory.service';
-import { LogLevel } from '../log-level.model';
-import { MinMaxLevelLogFilter } from '../filter/min-max-level-log-filter';
+import { LogLevel } from '../../log-level.model';
+import { MinMaxLevelLogFilter } from '../../filter/min-max-level-log-filter';
 import { SourceParser } from './source-parser';
 import { Injectable } from '@angular/core';
 

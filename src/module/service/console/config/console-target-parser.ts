@@ -1,7 +1,7 @@
-import { ConsoleLoggerTargetConfig } from '../config/console-logger-target-config';
-import { LogFilter } from '../filter/log-filter';
-import { FilterParser } from './filter-parser';
+import { ConsoleLoggerTargetConfig } from './console-logger-target-config';
+import { LogFilter } from '../../filter/log-filter';
 import { Injectable } from '@angular/core';
+import { FilterParser } from '../../config/filter/filter-parser';
 
 @Injectable()
 export class ConsoleTargetParser {

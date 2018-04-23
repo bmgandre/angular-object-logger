@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
-import { LogEntry } from '../log-entry.model';
-import { LogLevel } from '../log-level.model';
+import { LoggerTargetService } from '../../target/logger-target-service';
 import { WebLoggerTargetConfig } from '../config/web-logger-target-config';
-import { LoggerTargetService } from './logger-target-service';
+import { LogEntry } from '../../log-entry.model';
 
 @Injectable()
 export class LoggerWebTargetService extends LoggerTargetService {

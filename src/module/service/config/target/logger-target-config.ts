@@ -1,4 +1,4 @@
-import { LogFilter } from '../filter/log-filter';
+import { LogFilter } from '../../filter/log-filter';
 
 export class LoggerTargetConfig {
     constructor(

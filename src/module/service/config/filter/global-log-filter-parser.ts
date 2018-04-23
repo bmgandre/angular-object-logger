@@ -1,4 +1,4 @@
-import { LogFilter } from '../filter/log-filter';
+import { LogFilter } from '../../filter/log-filter';
 import { FilterParser } from './filter-parser';
 import { Injectable } from '@angular/core';
 

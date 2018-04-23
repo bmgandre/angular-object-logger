@@ -1,10 +1,10 @@
-import { LoggerConfig } from '../config/logger-config';
-import { LogFilter } from '../filter/log-filter';
-import { GlobalLogFilterParser } from './global-log-filter-parser';
-import { ConsoleTargetParser } from './console-target-parser';
-import { WebTargetParser } from './web-target-parser';
-import { LoggerEnvironmentConfig } from './logger-environment-config';
+import { GlobalLogFilterParser } from './filter/global-log-filter-parser';
 import { Injectable } from '@angular/core';
+import { LogFilter } from '../filter/log-filter';
+import { LoggerConfig } from '../config/logger-config';
+import { LoggerEnvironmentConfig } from './logger-environment-config';
+import { ConsoleTargetParser } from '../console/config/console-target-parser';
+import { WebTargetParser } from '../web/config/web-target-parser';
 
 @Injectable()
 export class LoggerConfigReader {

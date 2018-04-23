@@ -1,5 +1,5 @@
-import { LogFilter } from '../filter/log-filter';
-import { LoggerTargetConfig } from './logger-target-config';
+import { LogFilter } from '../../filter/log-filter';
+import { LoggerTargetConfig } from '../../config/target/logger-target-config';
 
 export class WebLoggerTargetConfig extends LoggerTargetConfig {
     constructor(

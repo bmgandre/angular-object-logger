@@ -6,11 +6,11 @@ import {
     LogEntry,
     TraceLogEntry,
     WarnLogEntry
-    } from '../log-entry.model';
+    } from '../../log-entry.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { LoggerWebTargetService } from './logger-web-target.service';
-import { MinMaxLevelLogFilter } from '../filter/min-max-level-log-filter';
+import { MinMaxLevelLogFilter } from '../../filter/min-max-level-log-filter';
 import { TestBed } from '@angular/core/testing';
 import { WebLoggerTargetConfig } from '../config/web-logger-target-config';
 

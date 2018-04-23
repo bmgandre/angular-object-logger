@@ -1,4 +1,3 @@
-import { ConsoleLoggerTargetConfig } from '../config/console-logger-target-config';
 import {
     DebugLogEntry,
     ErrorLogEntry,
@@ -7,12 +6,13 @@ import {
     LogEntry,
     TraceLogEntry,
     WarnLogEntry
-    } from '../log-entry.model';
-import { FixedLevelLogFilter } from '../filter/fixed-level-log-filter';
-import { MinMaxLevelLogFilter } from '../filter/min-max-level-log-filter';
-import { MultiLevelLogFilter } from '../filter/multi-level-log-filter';
+    } from '../../log-entry.model';
 import { LoggerConsoleTargetService } from './logger-console-target.service';
-import { LogLevel } from '../log-level.model';
+import { MinMaxLevelLogFilter } from '../../filter/min-max-level-log-filter';
+import { ConsoleLoggerTargetConfig } from '../config/console-logger-target-config';
+import { FixedLevelLogFilter } from '../../filter/fixed-level-log-filter';
+import { LogLevel } from '../../log-level.model';
+import { MultiLevelLogFilter } from '../../filter/multi-level-log-filter';
 
 describe('Console target service', () => {
 

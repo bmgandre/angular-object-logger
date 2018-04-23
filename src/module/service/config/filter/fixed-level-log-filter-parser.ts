@@ -1,5 +1,5 @@
-import { FixedLevelLogFilter } from '../filter/fixed-level-log-filter';
-import { LogLevel } from '../log-level.model';
+import { FixedLevelLogFilter } from '../../filter/fixed-level-log-filter';
+import { LogLevel } from '../../log-level.model';
 import { SourceParser } from './source-parser';
 import { Injectable } from '@angular/core';
 

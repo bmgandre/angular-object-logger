@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoggerConfig } from '../config/logger-config';
-import { LoggerConsoleTargetService } from '../target/logger-console-target.service';
 import { LoggerService } from '../logger.service';
 import { LoggerTargetService } from '../target/logger-target-service';
-import { LoggerWebTargetService } from '../target/logger-web-target.service';
-import { LoggerConfigReader } from './logger-config-reader';
+import { LoggerConfigReader } from '../config/logger-config-reader';
+import { LoggerConsoleTargetService } from '../console/target/logger-console-target.service';
+import { LoggerWebTargetService } from '../web/target/logger-web-target.service';
 
 @Injectable()
 export class LoggerFactoryService {
