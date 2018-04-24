@@ -1,7 +1,7 @@
 import { LogLevel } from '../log-level.model';
 
 export abstract class LogFilter {
-    private source: string;
+    source: string;
     private regexp: RegExp;
 
     constructor(source: string) {
