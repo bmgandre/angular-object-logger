@@ -47,7 +47,7 @@ describe('Parse console target configuration', () => {
                     .toBeNull();
             });
 
-            test('then the console contains two filters', () => {
+            test('then the console contains 2 filters', () => {
                 expect(consoleTargetConfig.filters)
                     .toHaveLength(2);
             });
@@ -82,7 +82,7 @@ describe('Parse console target configuration', () => {
                     .toBeNull();
             });
 
-            test('then the console contains two filters', () => {
+            test('then the console contains 3 filters', () => {
                 expect(consoleTargetConfig.filters)
                     .toHaveLength(3);
             });
@@ -122,7 +122,7 @@ describe('Parse console target configuration', () => {
                     .toBeNull();
             });
 
-            test('then the console contains two filters', () => {
+            test('then the console contains 7 filters', () => {
                 expect(consoleTargetConfig.filters)
                     .toHaveLength(7);
             });

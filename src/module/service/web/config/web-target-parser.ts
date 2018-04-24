@@ -10,10 +10,13 @@ export class WebTargetParser {
     ) {}
 
     parse(obj: any, globalFilters: Array<LogFilter>): WebLoggerTargetConfig {
-        const rules = (obj.filters)
+        let rules = (obj.filters)
             ? this.filterParser.parse(obj.filters)
             : Array<LogFilter>();
-        rules.concat(globalFilters);
+
+        if (globalFilters) {
+            rules = rules.concat(globalFilters);
+        }
 
         const targetConfig = new WebLoggerTargetConfig(rules, obj.endpoint, obj.secret);
 
