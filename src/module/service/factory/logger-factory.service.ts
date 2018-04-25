@@ -9,8 +9,8 @@ import { LoggerWebTargetService } from '../web/target/logger-web-target.service'
 
 @Injectable()
 export class LoggerFactoryService {
+    loggerTargets: Array<LoggerTargetService> = [];
     private loggerConfig: LoggerConfig;
-    private loggerTargets: Array<LoggerTargetService> = [];
 
     constructor(
         private configReader: LoggerConfigReader,
