@@ -54,6 +54,7 @@
     "gulp-rollup": "^2.11.0",
     "jest": "^22.1.4",
     "jest-preset-angular": "^5.0.0",
+    "jest-tap-reporter": "^1.9.0",
     "lite-server": "^2.3.0",
     "node-sass": "^4.5.2",
     "node-sass-tilde-importer": "^1.0.0",
@@ -80,6 +81,16 @@
       "src/module/**/*.{ts}",
       "!src/module/lib.module.ts"
     ],
-    "coverageDirectory": "coverage"
+    "coverageDirectory": "coverage",
+    "reporters": [
+      "default",
+      [
+        "jest-tap-reporter",
+        {
+          "logLevel": "ERROR",
+          "showInternalStackTraces": true
+        }
+      ]
+    ]
   }
 }
