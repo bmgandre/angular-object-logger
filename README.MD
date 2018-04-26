@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.org/bmgandre/angular-object-logger.svg?branch=master)](https://travis-ci.org/bmgandre/angular-object-logger)
+[![codecov](https://codecov.io/gh/bmgandre/angular-object-logger/branch/master/graph/badge.svg)](https://codecov.io/gh/bmgandre/angular-object-logger)
 
+
+[![NPM](https://nodei.co/npm/angular-object-logger.png)](https://nodei.co/npm/angular-object-logger/)
 # angular-object-logger
 
 Send objects logs to console or web.
