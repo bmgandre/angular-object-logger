@@ -43,8 +43,7 @@ import {
     LoggerServiceModule
   ],
   providers: [
-    LoggerFactoryService,
-    { provide: LoggerFactoryConfig, useValue: environment }
+    { provide: LoggerEnvironmentConfig, useValue: environment }
   ],
   bootstrap: [ AppComponent ]
 })
