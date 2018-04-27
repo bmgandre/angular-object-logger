@@ -1,7 +1,7 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { LogEntry } from './log-entry.model';
-import { LogLevel } from './log-level.model';
-import { LoggerTargetConfig } from './logger-target-config.model';
+import { LogEntry } from '../log-entry.model';
+import { LogLevel } from '../log-level.model';
+import { LoggerTargetConfig } from '../config/target/logger-target-config';
 
 export abstract class LoggerTargetService {
 

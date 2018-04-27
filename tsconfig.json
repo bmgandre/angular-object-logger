@@ -10,7 +10,8 @@
     ],
     "types": [
       "stacktrace-js",
-      "jest"
+      "jest",
+      "node"
     ],
     "typeRoots": [
       "node_modules/@types"

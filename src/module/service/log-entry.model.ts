@@ -9,7 +9,7 @@ export class LogSource {
     stack?: string;
 }
 
-export class LogEntry {
+export interface LogEntry {
     level: string;
     timestamp: Date;
     logger: string;

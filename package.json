@@ -1,6 +1,6 @@
 {
   "name": "angular-object-logger",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "scripts": {
     "build": "gulp build",
     "build:watch": "gulp",
@@ -13,9 +13,9 @@
     "playground:lint": "npm run build && tslint --type-check --project playground/tsconfig.json",
     "playground:build": "tsc -p playground -w",
     "playground": "concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run lite\"",
-    "test": "jest --config jest.config.json",
-    "test:watch": "jest --config jest.config.json --watch",
-    "test:ci": "jest --config jest.config.json --runInBand"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand"
   },
   "repository": {
     "type": "git",
@@ -54,6 +54,7 @@
     "gulp-rollup": "^2.11.0",
     "jest": "^22.1.4",
     "jest-preset-angular": "^5.0.0",
+    "jest-tap-reporter": "^1.9.0",
     "lite-server": "^2.3.0",
     "node-sass": "^4.5.2",
     "node-sass-tilde-importer": "^1.0.0",
@@ -74,6 +75,22 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
-    "setupTestFrameworkScriptFile": "<rootDir>/src/jest.ts"
+    "setupTestFrameworkScriptFile": "<rootDir>/src/jest.ts",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/module/**/*.{ts}",
+      "!src/module/lib.module.ts"
+    ],
+    "coverageDirectory": "coverage",
+    "reporters": [
+      "default",
+      [
+        "jest-tap-reporter",
+        {
+          "logLevel": "ERROR",
+          "showInternalStackTraces": true
+        }
+      ]
+    ]
   }
 }

@@ -1,8 +1,8 @@
+import { ConsoleLoggerTargetConfig } from '../config/console-logger-target-config';
 import { Inject, Injectable, Optional } from '@angular/core';
-import { InvalidLogEntryError, LogEntry } from './log-entry.model';
-import { LogLevel } from './log-level.model';
-import { ConsoleLoggerTargetConfig } from './logger-target-config.model';
-import { LoggerTargetService } from './logger-target-service.model';
+import { InvalidLogEntryError, LogEntry } from '../../log-entry.model';
+import { LoggerTargetService } from '../../target/logger-target-service';
+import { LogLevel } from '../../log-level.model';
 
 @Injectable()
 export class LoggerConsoleTargetService extends LoggerTargetService {

@@ -1,0 +1,6 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "nodeTdd.reporter": "tap",
+    "nodeTdd.showCoverage": true,
+    "nodeTdd.glob": "src/module/service/**/*.spec.ts"
+}

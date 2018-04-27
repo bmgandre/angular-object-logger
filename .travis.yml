@@ -1,25 +1,36 @@
 language: node_js
 sudo: false
 matrix:
-    include:
-      - os: linux
-        node_js: '6'
-      - os: linux
-        node_js: '7'
-      - os: linux
-        node_js: '8'
-      - os: linux
-        node_js: '9'
-      - os: osx
-        node_js: '6'
-      - os: osx
-        node_js: '7'
-      - os: osx
-        node_js: '8'
-      - os: osx
-        node_js: '9'
+  include:
+  - os: linux
+    node_js: '6'
+  - os: linux
+    node_js: '7'
+  - os: linux
+    node_js: '8'
+  - os: linux
+    node_js: '9'
+  - os: osx
+    node_js: '6'
+  - os: osx
+    node_js: '7'
+  - os: osx
+    node_js: '8'
+  - os: osx
+    node_js: '9'
 install:
-  - npm install
+- npm install
 script:
-  - npm run lint
-  - npm run build
+- npm run lint
+- npm run build
+- npm run test
+after_success:
+- bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+deploy:
+  provider: npm
+  email: bmg.andre@gmail.com
+  api_key:
+    secure: HH0awdr4CedBo5crJmThixhfwtQQTY2XRch9i18qFf3xXrrxK1hAfX96IKAYOmP7CN7OyAsAnn/h9Z0gGfEhzPWOa8WTeOiPEybqiFWeFAcDyQ1sUcK3UyUBsv8D5pChRK4H0/9PEkk9QVsRY18wDucOxghiBmwAW0EDhmW9aQv9JRGNFt4KUwd2TkNSDQfbPgrhpiEiGM8GzC8pEeK1wHhzesh4fwfSLeAATbgDEIjzkY3zpdurpN87IloolEDpGxVNNfVXTEBDGGJt5kItVaye5xMYahLWhGiS8fksN0kHEQD5+GdWCODFQe3tbfCpFkimADWEWATwxzcf6rF5hWJRpEaZd8A/sokGVIbpfp04UsPgQUkYMlLOQ5h4aOyCz3n4hNeS7oPKN6HVs6voqMuoYKfhGeka7oefGiSls/ZpzAw8nxquf4/oKLEmU7X+Jb/HBu/SShAgV01dU4DL8JqM2hn/7j5vgiBFcgXBpiRO0/c03qk1C54Ny6kU0dvNxrG7PUZkXBv26CzQqpXFuMdniEpeAUXeIawoWqnDqAOflsq0VWBdFBNvipavfh+Anc5r4vJcrkwX21uVJYR6VUtt9xKWC1pcPl05eBmJKu3x9T4NVc0p4QYUAE4Nk5ik6Ax5kkS8wu6U6DIMttxciTtEgUmHJT/DvhvZZAVCd1A=
+  on:
+    tags: true
+    repo: bmgandre/angular-object-logger

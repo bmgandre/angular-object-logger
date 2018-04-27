@@ -20,6 +20,7 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+.coverage
 
 # nyc test coverage
 .nyc_output
@@ -75,6 +76,7 @@ src/**/*.d.ts
 playground/*.js
 playground/*.map
 playground/*.d.ts
+build/
 
 # JetBrains
 .idea
