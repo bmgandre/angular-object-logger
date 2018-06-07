@@ -1,85 +1,66 @@
 {
   "name": "angular-object-logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "license": "MIT",
   "scripts": {
-    "build": "gulp build",
-    "build:watch": "gulp",
-    "docs": "npm run docs:build",
-    "docs:build": "compodoc -p tsconfig.json -n angular-object-logger -d docs --hideGenerator",
-    "docs:serve": "npm run docs:build -- -s",
-    "docs:watch": "npm run docs:build -- -s -w",
-    "lint": "tslint --project tsconfig.json",
-    "lite": "lite-server",
-    "playground:lint": "npm run build && tslint --type-check --project playground/tsconfig.json",
-    "playground:build": "tsc -p playground -w",
-    "playground": "concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run lite\"",
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:libs": "ng-packagr -p libs/angular-object-logger/package.json",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:ci": "jest --runInBand"
+    "lint": "ng lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bmgandre/angular-object-logger"
-  },
-  "author": {
-    "name": "André Gomes",
-    "email": "bmg.andre@gmail.com"
-  },
-  "keywords": [
-    "angular"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bmgandre/angular-object-logger/issues"
+  "private": true,
+  "dependencies": {
+    "angular-object-logger": "file:./libs/angular-object-logger",
+    "@angular/animations": "5.2.7",
+    "@angular/common": "5.2.7",
+    "@angular/compiler": "5.2.7",
+    "@angular/core": "5.2.7",
+    "@angular/forms": "5.2.7",
+    "@angular/platform-browser": "5.2.7",
+    "@angular/platform-browser-dynamic": "5.2.7",
+    "@angular/router": "5.2.7",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.5.6",
+    "stacktrace-js": "^2.0.0",
+    "zone.js": "^0.8.19"
   },
   "devDependencies": {
-    "@angular/common": "^5.2.9",
-    "@angular/compiler": "^5.2.9",
-    "@angular/compiler-cli": "^5.2.9",
-    "@angular/core": "^5.2.9",
-    "@angular/platform-browser": "^5.2.9",
-    "@angular/platform-browser-dynamic": "^5.2.9",
-    "@compodoc/compodoc": "^1.0.9",
-    "@types/jest": "^22.0.1",
+    "@angular/cli": "1.7.1",
+    "@angular/compiler-cli": "5.2.7",
+    "@angular/language-service": "5.2.7",
+    "@types/jest": "^22.2.3",
     "@types/node": "~6.0.60",
-    "@types/stacktrace-js": "^0.0.32",
-    "angular-tslint-rules": "^1.2.1",
-    "codelyzer": "~4.2.1",
-    "concurrently": "^3.4.0",
-    "core-js": "^2.4.1",
-    "del": "^2.2.2",
-    "fs-extra": "^5.0.0",
-    "gulp": "^3.9.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-rollup": "^2.11.0",
-    "jest": "^22.1.4",
-    "jest-preset-angular": "^5.0.0",
+    "@types/stacktrace-js": "0.0.32",
+    "angular-tslint-rules": "^1.4.1",
+    "codelyzer": "^4.0.1",
+    "jasmine-core": "~2.8.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "jest": "^22.4.3",
+    "jest-preset-angular": "^5.2.2",
     "jest-tap-reporter": "^1.9.0",
-    "lite-server": "^2.3.0",
-    "node-sass": "^4.5.2",
-    "node-sass-tilde-importer": "^1.0.0",
-    "node-watch": "^0.5.2",
-    "protractor": "~5.1.2",
-    "rollup": "^0.49.3",
-    "run-sequence": "^1.2.2",
-    "rxjs": "^5.5.2",
-    "stacktrace-js": "^2.0.0",
-    "systemjs": "^0.20.12",
-    "ts-node": "~3.2.0",
-    "tslint": "~5.9.1",
-    "typescript": "~2.6.2",
-    "zone.js": "^0.8.14"
-  },
-  "engines": {
-    "node": ">=6.0.0"
+    "ng-packagr": "^2.4.2",
+    "prettier": "1.10.2",
+    "ts-node": "~4.1.0",
+    "tslint": "~5.10.0",
+    "typescript": "2.6.2"
   },
   "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "./tsconfig.spec.json"
+      },
+      "__TRANSFORM_HTML__": true
+    },
     "preset": "jest-preset-angular",
-    "setupTestFrameworkScriptFile": "<rootDir>/src/jest.ts",
+    "setupTestFrameworkScriptFile": "<rootDir>/jest.ts",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/module/**/*.{ts}",
-      "!src/module/lib.module.ts"
+      "libs/**/*.{ts}",
+      "!libs/**/index.ts",
+      "!libs/**/jest*.ts"
     ],
     "coverageDirectory": "coverage",
     "reporters": [

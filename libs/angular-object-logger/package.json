@@ -1,6 +1,18 @@
 {
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "lib": {
+    "umdModuleIds": {
+      "stacktrace-js": "stacktrace"
+    }
+  },
   "name": "angular-object-logger",
-  "version": "0.1.0",
+  "version": "1.0.1",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "index.ts"
+    },
+    "dest": "../../dist/angular-object-logger"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bmgandre/angular-object-logger"
