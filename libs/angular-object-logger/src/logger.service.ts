@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import * as StackTrace from 'stacktrace-js';
+import * as StackTraceNs from 'stacktrace-js';
 import {
   DebugLogEntry,
   ErrorLogEntry,
@@ -11,6 +11,9 @@ import {
   WarnLogEntry
 } from './log-entry.model';
 import { LoggerTargetService } from './target/logger-target-service';
+
+// tslint:disable-next-line:variable-name
+const StackTrace = StackTraceNs;
 
 // @dynamic
 @Injectable()

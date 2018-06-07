@@ -9,9 +9,7 @@
   "linterOptions": {
     "exclude": [
         "dist/*",
-        ".build/*",
-        "playground/*",
-        ".playground/*"
+        ".build/*"
     ]
   }
 }

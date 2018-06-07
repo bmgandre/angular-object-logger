@@ -1,23 +1,25 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./src",
-    "rootDir": "./src",
-    "outDir": "./build",
     "moduleResolution": "node",
+    "target": "es5",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "lib": [
       "es2015",
       "dom"
     ],
-    "types": [
-      "stacktrace-js",
-      "jest",
-      "node"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "experimentalDecorators": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
-  }
+    "suppressImplicitAnyIndexErrors": true,
+    "baseUrl": "."
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ],
 }
