@@ -6,7 +6,7 @@
     }
   },
   "name": "angular-object-logger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "ngPackage": {
     "lib": {
       "entryFile": "index.ts"
