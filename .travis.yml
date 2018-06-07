@@ -23,6 +23,7 @@ install:
 script:
 - npm run lint
 - npm run build
+- npm run build:libs
 - npm run test
 after_success:
 - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
