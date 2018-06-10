@@ -30,6 +30,7 @@ after_success:
 before_deploy:
   - cd dist/angular-object-logger
 deploy:
+  skip_cleanup: true
   provider: npm
   email: bmg.andre@gmail.com
   api_key:
