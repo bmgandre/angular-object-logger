@@ -1,12 +1,13 @@
 {
   "name": "angular-object-logger",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "build:libs": "ng-packagr -p libs/angular-object-logger/package.json",
+    "deploy:docs": "gulp deploy:docs",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "ng lint"
@@ -35,7 +36,11 @@
     "@types/node": "~6.0.60",
     "@types/stacktrace-js": "0.0.32",
     "angular-tslint-rules": "^1.4.1",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
     "codelyzer": "^4.0.1",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^2.0.1",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "jest": "^22.4.3",
@@ -72,6 +77,11 @@
           "showInternalStackTraces": true
         }
       ]
+    ]
+  },
+  "babel": {
+    "presets": [
+      "es2015"
     ]
   }
 }
