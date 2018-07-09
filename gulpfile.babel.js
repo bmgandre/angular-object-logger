@@ -12,4 +12,4 @@ gulp.task('deploy:license', () => {
     .pipe(gulp.dest(deployFolder));
 });
 
-gulp.task('deploy:docs', [ 'deploy:readme', 'deploy:license' ]);
+gulp.task('deploy:docs', gulp.parallel('deploy:readme', 'deploy:license'));
