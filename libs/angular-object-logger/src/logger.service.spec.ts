@@ -1,6 +1,5 @@
 import { LoggerService } from './logger.service';
 import { LoggerTargetService } from './target/logger-target-service';
-import { LoggerConsoleTargetService } from './target/logger-console-target.service';
 import * as StackTrace from 'stacktrace-js';
 import { LogEntry } from './log-entry.model';
 import { LogLevel } from './log-level.model';
