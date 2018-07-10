@@ -6,7 +6,7 @@
     }
   },
   "name": "angular-object-logger",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "ngPackage": {
     "lib": {
       "entryFile": "index.ts"
@@ -36,8 +36,6 @@
   "peerDependencies": {
     "@angular/core": ">= 4.3.0",
     "@angular/common": ">= 4.3.0",
-    "rxjs": ">= ^5.1.0",
-    "zone.js": ">= ^0.8.4",
-    "stacktrace-js": ">= ^2.0.0"
+    "stacktrace-js": ">= 2.0.0"
   }
 }
